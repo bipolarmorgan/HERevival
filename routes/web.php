@@ -26,7 +26,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/', 'BrowserController@index')->name('get.browser.index');
         Route::get('login', 'BrowserController@showLogin')->name('get.browser.login');
         Route::get('hack', 'BrowserController@hack')->name('get.browser.hack');
-        Route::post('ip', 'BrowserController@setIp')->name('set.browser.ip');
+        Route::get('ip/{ip}', 'BrowserController@setIp')->name('get.browser.ip');
+        Route::post('ip', 'BrowserController@setIp')->name('post.browser.ip');
 
         Route::post('login', 'BrowserController@login');
 

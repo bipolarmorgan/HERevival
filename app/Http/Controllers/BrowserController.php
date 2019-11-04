@@ -26,6 +26,11 @@ class BrowserController extends Controller {
     }
 
     public function showLogin() {
+        if (session('browser_auth') !== session('browser_session')) {
+            session(['browser_session' => session('browser_auth')]);
+
+            return redirect()->route('get.browser.index');
+        }
         return view('pages.browser.login');
     }
 
@@ -57,10 +62,21 @@ class BrowserController extends Controller {
     }
 
     public function hack() {
+        if (session('browser_auth') !== session('browser_session')) {
+            session(['browser_session' => session('browser_auth')]);
+
+            return redirect()->route('get.browser.index');
+        }
         return view('pages.browser.hack');
     }
 
     public function setIp(Request $request) {
+        if ($request->method() === 'GET') {
+            session(['browser_session' => session('browser_auth')]);
+
+            return redirect()->route('get.browser.index');
+        }
+
         $request->validate([
             'ip' => 'required|ip'
         ]);

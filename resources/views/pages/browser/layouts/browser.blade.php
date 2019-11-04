@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-body">
-                    <form method="post" action="{{ route('set.browser.ip', session('browser_session')) }}">
+                    <form method="post" action="{{ route('post.browser.ip', session('browser_session')) }}">
                         @csrf
                         <input class="form-control" name="ip" placeholder="{{ session('browser_session') }}">
                     </form>
@@ -13,7 +13,7 @@
             </div>
             @if (session('browser_auth') && session('browser_session') !== session('browser_auth'))
                 <div class="alert alert-warning" role="alert">
-                    You're already logged in to <form method="post" action="{{ route('set.browser.ip', session('browser_auth')) }}">@csrf <input type="hidden" name="ip" value="{{ session('browser_auth') }}"> <btn, do you want to <a href="#">log out</a>?
+                    You're already logged in to <a href="{{ route('get.browser.ip', session('browser_auth')) }}">{{ session('browser_auth') }}</a>, do you want to <a href="#">log out</a>?
                 </div>
             @endif
             <div class="card mb-3">
