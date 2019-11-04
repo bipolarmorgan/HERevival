@@ -19,14 +19,16 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('home', 'HomeController@index')->name('home');
 
     Route::prefix('internet')->group(function() {
 
         Route::get('/', 'BrowserController@index')->name('get.browser.index');
-        Route::get('/login', 'BrowserController@login')->name('get.browser.login');
-        Route::get('/hack', 'BrowserController@hack')->name('get.browser.hack');
-        Route::post('/ip', 'BrowserController@setIp')->name('set.browser.ip');
+        Route::get('login', 'BrowserController@showLogin')->name('get.browser.login');
+        Route::get('hack', 'BrowserController@hack')->name('get.browser.hack');
+        Route::post('ip', 'BrowserController@setIp')->name('set.browser.ip');
+
+        Route::post('login', 'BrowserController@login');
 
     });
 });

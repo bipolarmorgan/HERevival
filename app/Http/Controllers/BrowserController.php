@@ -25,8 +25,35 @@ class BrowserController extends Controller {
         return view('pages.browser.index', ['webserver' => $webserver]);
     }
 
-    public function login() {
+    public function showLogin() {
         return view('pages.browser.login');
+    }
+
+    public function login(Request $request) {
+        if (!session('browser_session')) {
+            session(['browser_session' => '1.2.3.4']);
+        }
+
+        if ($request->username !== 'root') {
+            return redirect()->back()->withErrors([
+                'username' => 'Username isn\'t correct.'
+            ]);
+        }
+
+        $npc = Npc::whereIpAddress(session('browser_session'))->wherePassword($request->password);
+        if (!$npc->exists()) {
+            return redirect()->back()->withErrors([
+                'password' => 'Password isn\'t correct.'
+            ]);
+        }
+
+        $npc = $npc->first();
+
+        session([
+            'browser_auth' => $npc->ip_address
+        ]);
+
+        return true;
     }
 
     public function hack() {

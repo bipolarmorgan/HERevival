@@ -7,7 +7,7 @@
                 @csrf
                 <div class="form-group row">
                     <div class="col-md-12">
-                        <input id="email" type="email" class="form-control" placeholder="{{ __('Username') }}">
+                        <input id="username" type="text" class="form-control" name="username" placeholder="{{ __('Username') }}">
                     </div>
                 </div>
 

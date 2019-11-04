@@ -14,7 +14,7 @@
     </head>
     <body>
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-lg">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">HERevival</a>
+                <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">HERevival</a>
             <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
