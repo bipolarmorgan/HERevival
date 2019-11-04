@@ -140,21 +140,21 @@
                         <div class="card-header border-bottom-0">
                             <i class="fad fa-stream mr-2"></i> Round Info
                             <span class="float-right badge badge-info">
-                                Round 1
+                                Round {{ current_round()->id }}
                             </span>
                         </div>
                         <table class="table table-striped mb-0">
                             <tr>
                                 <td>Name</td>
-                                <td>ROUND-01-ALPHA</td>
+                                <td>{{ current_round()->name }}</td>
                             </tr>
                             <tr>
                                 <td>Started</td>
-                                <td>{{ date('Y-m-d') }}</td>
+                                <td>{{ current_round()->created_at->format('Y-m-d') }}</td>
                             </tr>
                             <tr>
                                 <td>Age</td>
-                                <td>{{ rand() % 14 }} days</td>
+                                <td>{{ current_round()->age }}</td>
                             </tr>
                         </table>
                     </div>
