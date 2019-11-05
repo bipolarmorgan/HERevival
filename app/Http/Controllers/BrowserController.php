@@ -26,11 +26,12 @@ class BrowserController extends Controller {
     }
 
     public function showLogin() {
-        if (session('browser_auth') !== session('browser_session')) {
+        if ((session('browser_auth') !== session('browser_session')) && !is_null(session('browser_auth'))) {
             session(['browser_session' => session('browser_auth')]);
 
             return redirect()->route('get.browser.index');
         }
+
         return view('pages.browser.login');
     }
 
@@ -62,7 +63,7 @@ class BrowserController extends Controller {
     }
 
     public function hack() {
-        if (session('browser_auth') !== session('browser_session')) {
+        if ((session('browser_auth') !== session('browser_session')) && !is_null(session('browser_auth'))) {
             session(['browser_session' => session('browser_auth')]);
 
             return redirect()->route('get.browser.index');
