@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 
 class BrowserController extends Controller {
     public function index() {
-        if (!session('browser_session')) {
-            session(['browser_session' => '1.2.3.4']);
-        }
+        $browser_session = user()->getBrowserSession();
 
-        $npc = Npc::whereIpAddress(session('browser_session'));
+        $npc = Npc::whereIpAddress($browser_session['ip_address']);
 
         if (!$npc->exists()) {
             return view('pages.browser.index', ['webserver' => 'IP does not exist.']);

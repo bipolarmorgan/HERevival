@@ -9,3 +9,14 @@ function generate_ip() {
 function current_round() {
     return \App\Round::first();
 }
+
+/**
+ * @return \Illuminate\Contracts\Auth\Authenticatable|\Illuminate\Http\RedirectResponse|App\User|null
+ */
+function user() {
+    if (!auth()->check()) {
+        return redirect()->route('home');
+    }
+
+    return auth()->user();
+}

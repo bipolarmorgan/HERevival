@@ -7,33 +7,33 @@
                 <div class="card-header border-bottom-0">
                     <i class="fad fa-laptop mr-2"></i> Hardware Information
                 </div>
-                <table class="table table-striped mb-0 table-icon">
-                    <tr>
-                        <td><i class="fad fa-microchip"></i></td>
-                        <td>Processor</td>
-                        <td>{{ auth()->user()->servers()->sum('cpu') / 1000 }} GHz</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fad fa-hdd"></i></td>
-                        <td>Hard Drive</td>
-                        <td>{{ auth()->user()->servers()->sum('hdd') / 1024 }} GB</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fad fa-memory"></i></td>
-                        <td>Memory</td>
-                        <td>{{ auth()->user()->servers()->sum('ram') / 1024 }} MB</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fad fa-ethernet"></i></td>
-                        <td>Network</td>
-                        <td>{{ auth()->user()->servers()->sum('network') }} Mbit/s</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-hdd"></i></td>
-                        <td>External HD</td>
-                        <td>{{ auth()->user()->servers()->sum('hdd') / 1000 }} GB</td>
-                    </tr>
-                </table>
+{{--                <table class="table table-striped mb-0 table-icon">--}}
+{{--                    <tr>--}}
+{{--                        <td><i class="fad fa-microchip"></i></td>--}}
+{{--                        <td>Processor</td>--}}
+{{--                        <td>{{ auth()->user()->servers()->sum('cpu') / 1000 }} GHz</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td><i class="fad fa-hdd"></i></td>--}}
+{{--                        <td>Hard Drive</td>--}}
+{{--                        <td>{{ auth()->user()->servers()->sum('hdd') / 1024 }} GB</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td><i class="fad fa-memory"></i></td>--}}
+{{--                        <td>Memory</td>--}}
+{{--                        <td>{{ auth()->user()->servers()->sum('ram') / 1024 }} MB</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td><i class="fad fa-ethernet"></i></td>--}}
+{{--                        <td>Network</td>--}}
+{{--                        <td>{{ auth()->user()->servers()->sum('network') }} Mbit/s</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td><i class="fa fa-hdd"></i></td>--}}
+{{--                        <td>External HD</td>--}}
+{{--                        <td>{{ auth()->user()->servers()->sum('hdd') / 1000 }} GB</td>--}}
+{{--                    </tr>--}}
+{{--                </table>--}}
             </div>
         </div>
         <div class="col-md-8 mb-4">
@@ -135,30 +135,30 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-header border-bottom-0">
-                            <i class="fad fa-stream mr-2"></i> Round Info
-                            <span class="float-right badge badge-info">
-                                Round {{ current_round()->id }}
-                            </span>
-                        </div>
-                        <table class="table table-striped mb-0">
-                            <tr>
-                                <td>Name</td>
-                                <td>{{ current_round()->name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Started</td>
-                                <td>{{ current_round()->created_at->format('Y-m-d') }}</td>
-                            </tr>
-                            <tr>
-                                <td>Age</td>
-                                <td>{{ current_round()->age }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+{{--                <div class="col-md-6 mb-4">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-header border-bottom-0">--}}
+{{--                            <i class="fad fa-stream mr-2"></i> Round Info--}}
+{{--                            <span class="float-right badge badge-info">--}}
+{{--                                Round {{ current_round()->id }}--}}
+{{--                            </span>--}}
+{{--                        </div>--}}
+{{--                        <table class="table table-striped mb-0">--}}
+{{--                            <tr>--}}
+{{--                                <td>Name</td>--}}
+{{--                                <td>{{ current_round()->name }}</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Started</td>--}}
+{{--                                <td>{{ current_round()->created_at->format('Y-m-d') }}</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Age</td>--}}
+{{--                                <td>{{ current_round()->age }}</td>--}}
+{{--                            </tr>--}}
+{{--                        </table>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
         <div class="col-md-4 mb-4">

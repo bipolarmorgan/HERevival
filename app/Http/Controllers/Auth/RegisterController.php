@@ -80,10 +80,5 @@ class RegisterController extends Controller {
         if (!auth()->check()) {
             abort(404); // TODO: Error
         }
-
-        Server::create([
-            'user_id' => $user->id,
-            'name' => 'Server #1',
-        ]);
     }
 }
