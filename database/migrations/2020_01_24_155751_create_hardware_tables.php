@@ -13,8 +13,8 @@ class CreateHardwareTables extends Migration {
     public function up() {
         Schema::create('hardware', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('npc_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('npc_id');
 
             $table->float('cpu')->default(512);
             $table->float('hdd')->default(102.4);
@@ -23,6 +23,9 @@ class CreateHardwareTables extends Migration {
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('npc_id')->references('id')->on('npcs');
         });
 
         Schema::dropIfExists('servers');
