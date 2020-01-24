@@ -41,7 +41,7 @@
                 <div class="card-header border-bottom-0">
                     <i class="fad fa-tablet mr-2"></i> General Info
                 </div>
-                <table class="table table-striped mb-0 table-icon">
+                <table class="table table-striped mb-0 table-icon table-bordered">
                     <tr>
                         <td><i class="fad fa-medal"></i></td>
                         <td>Reputation</td>
