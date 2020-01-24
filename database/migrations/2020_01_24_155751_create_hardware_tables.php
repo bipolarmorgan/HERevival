@@ -14,26 +14,18 @@ class CreateHardwareTables extends Migration {
         Schema::create('hardware', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
+            $table->bigInteger('npc_id');
 
             $table->float('cpu')->default(512);
             $table->float('hdd')->default(102.4);
             $table->float('ram')->default(256);
             $table->float('net')->default(1);
 
-            $table->boolean('is_npc')->default(false);
-
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::table('servers', function (Blueprint $table) {
-            $table->dropColumn([
-                'cpu',
-                'hdd',
-                'ram',
-                'network'
-            ]);
-        });
+        Schema::dropIfExists('servers');
     }
 
     /**
@@ -44,11 +36,25 @@ class CreateHardwareTables extends Migration {
     public function down() {
         Schema::dropIfExists('hardware');
 
-        Schema::table('servers', function (Blueprint $table) {
-            $table->integer('cpu')->default(512);
-            $table->integer('hdd')->default(102.4);
+        Schema::create('servers', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('npc_id')->nullable();
+
+            $table->string('name');
+
+            $table->integer('cpu')->default(500);
+            $table->integer('hdd')->default(100);
             $table->integer('ram')->default(256);
             $table->integer('network')->default(1);
+
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::table('servers', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('npc_id')->references('id')->on('npcs');
         });
     }
 }
