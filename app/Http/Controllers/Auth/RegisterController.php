@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Server;
+use App\Hardware;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -80,5 +80,9 @@ class RegisterController extends Controller {
         if (!auth()->check()) {
             abort(404); // TODO: Error
         }
+
+        Hardware::create([
+            'user_id' => auth()->id()
+        ]);
     }
 }

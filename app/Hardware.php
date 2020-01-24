@@ -5,8 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Server extends Model {
+class Hardware extends Model {
     use SoftDeletes;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'hardware';
 
     /**
      * The attributes that are mass assignable.

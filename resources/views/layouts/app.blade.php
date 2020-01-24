@@ -10,6 +10,9 @@
               rel="stylesheet">
         <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/other.css') }}">
+
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
     </head>
     <body>

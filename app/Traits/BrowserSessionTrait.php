@@ -4,8 +4,6 @@ namespace App\Traits;
 
 trait BrowserSessionTrait {
 
-    public $browser_ip = '1.2.3.4';
-
     /**
      * Create the browser session.
      * @return mixed
@@ -16,7 +14,7 @@ trait BrowserSessionTrait {
         }
 
         session()->put(['browser_session' => [
-            'ip_address' => $this->browser_ip,
+            'ip_address' => env('DEFAULT_GAME_IP'),
             'auth'       => false
         ]]);
 
@@ -59,5 +57,24 @@ trait BrowserSessionTrait {
      */
     public function hasBrowserSession() {
         return session()->exists('browser_session');
+    }
+
+    /**
+     * Checks if the user is logged in to the current server
+     * @return bool
+     */
+    public function isLoggedInToCurrentServer() {
+        return $this->getBrowserSession()['auth'];
+    }
+
+    /**
+     * Switch the "auth" state to whether user is logged in/out
+     * @return bool
+     */
+    public function switchAuthState() {
+        return $this->replaceBrowserSession([
+            'ip_address' => $this->getBrowserSession()['ip_address'],
+            'auth'       => !$this->getBrowserSession()['auth']
+        ]);
     }
 }

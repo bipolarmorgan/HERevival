@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class BrowserController extends Controller {
     public function index() {
-        $browser_session = user()->getBrowserSession();
+        $browser_session = user()->createBrowserSession();
 
         $npc = Npc::whereIpAddress($browser_session['ip_address']);
 
         if (!$npc->exists()) {
-            return view('pages.browser.index', ['webserver' => 'IP does not exist.']);
+            return view('pages.browser.error.404');
         }
 
         $npc = $npc->first();
@@ -24,9 +24,11 @@ class BrowserController extends Controller {
     }
 
     public function showLogin() {
-        if ((session('browser_auth') !== session('browser_session')) && !is_null(session('browser_auth'))) {
-            session(['browser_session' => session('browser_auth')]);
+        $browser_session = user()->createBrowserSession();
 
+        $npc = Npc::whereIpAddress($browser_session['ip_address']);
+
+        if (!$npc->exists()) {
             return redirect()->route('get.browser.index');
         }
 
@@ -34,9 +36,7 @@ class BrowserController extends Controller {
     }
 
     public function login(Request $request) {
-        if (!session('browser_session')) {
-            session(['browser_session' => '1.2.3.4']);
-        }
+        $browser_session = user()->createBrowserSession();
 
         if ($request->username !== 'root') {
             return redirect()->back()->withErrors([
@@ -44,7 +44,7 @@ class BrowserController extends Controller {
             ]);
         }
 
-        $npc = Npc::whereIpAddress(session('browser_session'))->wherePassword($request->password);
+        $npc = Npc::whereIpAddress($browser_session['ip_address'])->wherePassword($request->password);
         if (!$npc->exists()) {
             return redirect()->back()->withErrors([
                 'password' => 'Password isn\'t correct.'
@@ -53,26 +53,29 @@ class BrowserController extends Controller {
 
         $npc = $npc->first();
 
-        session([
-            'browser_auth' => $npc->ip_address
+
+        user()->replaceBrowserSession([
+            'ip_address' => $npc->ip_address,
+            'auth'       => true
         ]);
 
-        return true;
+        return redirect()->back();
     }
 
     public function hack() {
-        if ((session('browser_auth') !== session('browser_session')) && !is_null(session('browser_auth'))) {
-            session(['browser_session' => session('browser_auth')]);
+        $browser_session = user()->createBrowserSession();
 
+        $npc = Npc::whereIpAddress($browser_session['ip_address']);
+
+        if (!$npc->exists() || user()->isLoggedInToCurrentServer()) {
             return redirect()->route('get.browser.index');
         }
+
         return view('pages.browser.hack');
     }
 
     public function setIp(Request $request) {
         if ($request->method() === 'GET') {
-            session(['browser_session' => session('browser_auth')]);
-
             return redirect()->route('get.browser.index');
         }
 
@@ -80,7 +83,10 @@ class BrowserController extends Controller {
             'ip' => 'required|ip'
         ]);
 
-        session(['browser_session' => $request->ip]);
+        user()->replaceBrowserSession([
+            'ip_address' => $request->ip,
+            'auth'       => false
+        ]);
 
         return redirect()->route('get.browser.index');
     }

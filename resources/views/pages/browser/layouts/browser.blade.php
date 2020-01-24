@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <form method="post" action="{{ route('post.browser.ip', session('browser_session')) }}">
                         @csrf
-                        <input class="form-control" name="ip" placeholder="{{ session('browser_session') }}">
+                        <input class="form-control" name="ip" placeholder="{{ user()->getBrowserSession()['ip_address'] }}">
                     </form>
                 </div>
             </div>

@@ -47,9 +47,7 @@ class User extends Authenticatable {
     /**
      * Relationships
      */
-
-
-    public function servers() {
-        return $this->hasMany(\App\Server::class)->whereNull('npc_id');
+    public function hardware() {
+        return $this->hasMany(\App\Hardware::class)->whereNull('npc_id');
     }
 }
