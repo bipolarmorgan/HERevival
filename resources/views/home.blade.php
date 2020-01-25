@@ -55,7 +55,7 @@
                     <tr>
                         <td><i class="fad fa-globe"></i></td>
                         <td>Connected to</td>
-                        <td>{!! user()->isLoggedInToCurrentServer() ? '<a href="'.route('get.browser.ip', user()->getBrowserSession()['ip_address']).'">'.user()->getBrowserSession()['ip_address'].'</a>' : 'No one' !!}</td>
+                        <td>{!! !is_null_or_empty(user()->getBrowserSessionValue('auth')) ? '<a href="'.route('get.browser.ip', user()->getBrowserSessionValue('auth')).'">'.user()->getBrowserSessionValue('auth').'</a>' : 'No one' !!}</td>
                     </tr>
                     <tr>
                         <td><i class="fad fa-folder"></i></td>

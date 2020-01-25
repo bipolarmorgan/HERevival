@@ -74,6 +74,7 @@ trait BrowserSessionTrait {
 
     /**
      * Checks if the user is logged in to the current server
+     * @param $value ip address of current server
      * @return bool
      */
     public function isLoggedInToCurrentServer($value) {
