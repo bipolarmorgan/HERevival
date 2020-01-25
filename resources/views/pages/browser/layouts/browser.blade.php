@@ -31,6 +31,12 @@
                     </ul>
                 </div>
                 <div class="card-body">
+                    @if (!is_null_or_empty(user()->getBrowserSessionValue('auth')) && user()->getBrowserSessionValue('auth') !== user()->getBrowserSessionValue('ip_address'))
+                        <div class="alert alert-warning" role="alert">
+                            You're already logged in to <a href="{{ route('get.browser.ip', user()->getBrowserSessionValue('auth')) }}">{{ user()->getBrowserSessionValue('auth') }}</a>, do you want to <a href="#">log out</a>?
+                        </div>
+                    @endif
+
                     @yield('browser_content')
                 </div>
             </div>

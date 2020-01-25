@@ -31,7 +31,7 @@
                     <tr>
                         <td><i class="fa fa-hdd"></i></td>
                         <td>External HD</td>
-                        <td>{{ auth()->user()->hardware()->sum('hdd') / 1000 }} GB</td>
+                        <td>{{ auth()->user()->hardware()->sum('hdd') / 1024 }} GB</td>
                     </tr>
                 </table>
             </div>

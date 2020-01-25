@@ -3,6 +3,15 @@
 @section('browser_content')
     <div class="card col-md-4 offset-md-4">
         <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="POST">
                 @csrf
                 <div class="form-group row">

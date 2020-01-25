@@ -20,3 +20,7 @@ function user() {
 
     return auth()->user();
 }
+
+function is_null_or_empty($val) {
+    return is_null($val) || empty($val);
+}

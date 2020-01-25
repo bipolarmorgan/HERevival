@@ -15,7 +15,7 @@ trait BrowserSessionTrait {
 
         session()->put(['browser_session' => [
             'ip_address' => env('DEFAULT_GAME_IP'),
-            'auth'       => false
+            'auth'       => null
         ]]);
 
         return session()->get('browser_session');
@@ -45,6 +45,19 @@ trait BrowserSessionTrait {
     }
 
     /**
+     * Gets a value of the given key in the browser session store
+     * @param $key
+     * @return mixed
+     */
+    public function getBrowserSessionValue($key) {
+        if (!$this->hasBrowserSession()) {
+            return $this->createBrowserSession()[$key];
+        }
+
+        return $this->getBrowserSession()[$key];
+    }
+
+    /**
      * Remove the browser session, if you've logged out for instance.
      */
     public function deleteBrowserSession() {
@@ -63,18 +76,17 @@ trait BrowserSessionTrait {
      * Checks if the user is logged in to the current server
      * @return bool
      */
-    public function isLoggedInToCurrentServer() {
-        return $this->getBrowserSession()['auth'];
+    public function isLoggedInToCurrentServer($value) {
+        return $this->getBrowserSessionValue('auth') === $value;
     }
 
     /**
      * Switch the "auth" state to whether user is logged in/out
      * @return bool
      */
-    public function switchAuthState() {
+    public function updateAuthValue($value) {
         return $this->replaceBrowserSession([
-            'ip_address' => $this->getBrowserSession()['ip_address'],
-            'auth'       => !$this->getBrowserSession()['auth']
+            'auth' => $value
         ]);
     }
 }

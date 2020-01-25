@@ -53,10 +53,9 @@ class BrowserController extends Controller {
 
         $npc = $npc->first();
 
-
         user()->replaceBrowserSession([
             'ip_address' => $npc->ip_address,
-            'auth'       => true
+            'auth'       => user()->getBrowserSessionValue('ip_address')
         ]);
 
         return redirect()->back();
@@ -75,17 +74,15 @@ class BrowserController extends Controller {
     }
 
     public function setIp(Request $request) {
-        if ($request->method() === 'GET') {
-            return redirect()->route('get.browser.index');
+        if ($request->method() === 'POST') {
+            $request->validate([
+                'ip' => 'required|ip'
+            ]);
         }
-
-        $request->validate([
-            'ip' => 'required|ip'
-        ]);
 
         user()->replaceBrowserSession([
             'ip_address' => $request->ip,
-            'auth'       => false
+            'auth' => is_null_or_empty(user()->getBrowserSessionValue('auth')) ? null : user()->getBrowserSessionValue('auth')
         ]);
 
         return redirect()->route('get.browser.index');
