@@ -1,6 +1,6 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import '~admin-lte/build/scss/AdminLTE';
 
-// Variables
-@import 'variables';
-@import 'sidebar';
+
+.table-icon tr td:first-child {
+    width: 10px
+}

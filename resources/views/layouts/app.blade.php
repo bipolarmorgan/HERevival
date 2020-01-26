@@ -1,104 +1,100 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Whatever - HERevival</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-              rel="stylesheet">
-        <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/other.css') }}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLTE 3 | Blank Page</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-
+        <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
-    <body>
-        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-lg">
-                <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">HERevival</a>
-            <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-user"></i> {{ auth()->guest() ? '' : auth()->user()->username }}</a>
+                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white" href="#">
+                            <i class="fas fa-user"></i> {{ auth()->user()->username }}
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-inbox"></i> Inbox</a>
+                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white" href="#">
+                            <i class="fas fa-envelope"></i> Inbox
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-wrench"></i> Settings</a>
+                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white" href="#">
+                            <i class="fas fa-wrench"></i> Settings
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <form action="/logout" method="post" class="form-inline">
-                            @csrf
-                            <button type="submit" class="nav-link" style="background-color: transparent;border: 0"><i class="fa fa-power-off"></i> Sign out</button>
-                        </form>
+                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white" href="#">
+                            <i class="fas fa-power-off"></i> Logout
+                        </a>
                     </li>
                 </ul>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                    <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
+            </nav>
+
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <a href="#" class="brand-link text-center">
+                    <span class="brand-text font-weight-light">HERevival</span>
+                </a>
+
+                <div class="sidebar">
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->route()->getName() !== "home" ?: 'active' }}" href="/home">
-                                    <i class="fas fa-home"></i> Dashboard
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-server"></i> Task Manager
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-folder-open"></i> Software
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->route()->getName() !== "get.browser.index" ?: 'active' }}" href="{{ route('get.browser.index') }}">
-                                    <i class="fas fa-globe-europe"></i> Internet
-                                    </a>
-                                </li>
-                            </ul>
-                    </div>
-                </nav>
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                    @if (isset($page_name))
-                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mb-3 border-bottom">
-                            <h1 class="h2">{{ $page_name }}</h1>
-                            <div class="btn-toolbar mb-2 mb-md-0">
-                                <div class="btn-group mr-2">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <h3 class="p-0 m-0">{{ auth()->user()->game_address }}</h3>
-                                        </li>
-                                        <li>
-                                            <small class="p-0 m-0 float-left"><i class="fad fa-clock"></i> {{ date('Y-m-d H:i') }}</small>
-                                            <small class="p-0 m-0 float-right"><i class="fad fa-users"></i> {{ rand() % 100 }}</small>
-                                        </li>
-                                        <li>
-                                            <small class="p-0 m-0 float-left"><i class="fad fa-star"></i> 1,212,214 (#1)</small>
-                                            <small class="p-0 m-0 float-right"><i class="fad fa-dollar-sign"></i> 15.000</small>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <div class="content-wrapper">
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-1">
+{{--                            <div class="col-sm-6">--}}
+{{--                                <h1>Blank Page</h1>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-6">--}}
+{{--                                <ol class="breadcrumb float-sm-right">--}}
+{{--                                    <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
+{{--                                    <li class="breadcrumb-item active">Blank Page</li>--}}
+{{--                                </ol>--}}
+{{--                            </div>--}}
                         </div>
-                    @endif
+                    </div>
+                </section>
+
+                <section class="content">
                     @yield('content')
-                </main>
+                </section>
             </div>
+
+            <footer class="main-footer">
+                <div class="float-right d-none d-sm-block">
+                    <b>Version</b> 1.0.0
+                </div>
+                <strong>&copy; {{ \Carbon\Carbon::now()->year }} - HERevival</strong>
+            </footer>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/esm/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/b69e08f7a4.js" crossorigin="anonymous"></script>
+
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
