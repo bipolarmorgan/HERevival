@@ -19,21 +19,21 @@
                 </div>
                 <div class="card mb-3">
                     <div class="card-header">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item{{ request()->routeIs('get.browser.index') ? '' : ' border rounded' }}">
-                                <a class="nav-link{{ request()->routeIs('get.browser.index') ? ' active' : '' }}"
+                        <ul class="nav">
+                            <li class="nav-item col px-0">
+                                <a class="nav-link btn btn-flat rounded-left btn-secondary{{ request()->routeIs('get.browser.index') ? ' active' : '' }}"
                                    href="{{ route('get.browser.index', $npc->ip_address) }}">
                                     <i class="fas fa-home"></i> Index
                                 </a>
                             </li>
-                            <li class="nav-item{{ request()->routeIs('get.browser.login') ? '' : ' border rounded' }} ml-2">
-                                <a class="nav-link{{ request()->routeIs('get.browser.login') ? ' active' : '' }}"
+                            <li class="nav-item col px-0">
+                                <a class="nav-link btn btn-flat btn-secondary{{ request()->routeIs('get.browser.login') ? ' active' : '' }}"
                                    href="{{ route('get.browser.login', $npc->ip_address) }}">
                                     <i class="fas fa-sign-in-alt"></i> Login
                                 </a>
                             </li>
-                            <li class="nav-item{{ request()->routeIs('get.browser.exploits') ? '' : ' border rounded' }} ml-2">
-                                <a class="nav-link{{ request()->routeIs('get.browser.exploits') ? ' active' : '' }}"
+                            <li class="nav-item col px-0">
+                                <a class="nav-link btn btn-flat rounded-right btn-secondary{{ request()->routeIs('get.browser.exploits') ? ' active' : '' }}"
                                    href="{{ route('get.browser.exploits', $npc->ip_address) }}">
                                     <i class="fas fa-terminal"></i> Exploits
                                 </a>
