@@ -1,5 +1,6 @@
 @extends('pages.browser.layouts.browser')
 
 @section('browser_content')
-    {{ $npc->webserver }}
+    <span class="float-sm-right badge badge-{{ $type['color'] }}">{{ $type['type'] }}</span>
+    {{ $server->webserver }}
 @endsection

@@ -37,7 +37,7 @@ class RegisterController extends Controller {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct () {
         $this->middleware('guest');
     }
 
@@ -47,11 +47,11 @@ class RegisterController extends Controller {
      * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data) {
+    protected function validator ( array $data ) {
         return Validator::make($data, [
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'     => [ 'required', 'string', 'max:255' ],
+            'email'    => [ 'required', 'string', 'email', 'max:255', 'unique:users' ],
+            'password' => [ 'required', 'string', 'min:8', 'confirmed' ],
         ]);
     }
 
@@ -61,14 +61,14 @@ class RegisterController extends Controller {
      * @param array $data
      * @return User
      */
-    protected function create(array $data) {
+    protected function create ( array $data ) {
         return User::create([
-            'username'      => $data['name'],
-            'email'         => $data['email'],
-            'password'      => Hash::make($data['password']),
-            'ip_address'    => request()->ip(),
-            'game_address'  => generate_ip(),
-            'game_password' => Str::random(6)
+            'username'        => $data[ 'name' ],
+            'email'           => $data[ 'email' ],
+            'password'        => Hash::make($data[ 'password' ]),
+            'real_ip_address' => request()->ip(),
+            'ip_address'      => generate_ip(),
+            'game_password'   => Str::random(6)
         ]);
     }
 
@@ -76,8 +76,8 @@ class RegisterController extends Controller {
      * @param Request $request
      * @param User $user
      */
-    protected function registered(Request $request, $user) {
-        if (!auth()->check()) {
+    protected function registered ( Request $request, $user ) {
+        if ( !auth()->check() ) {
             abort(404); // TODO: Error
         }
 

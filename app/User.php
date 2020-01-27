@@ -19,8 +19,8 @@ class User extends Authenticatable {
         'email',
         'password',
         'game_password',
+        'real_ip_address',
         'ip_address',
-        'game_address',
         'is_admin',
         'learning_step',
         'webserver'

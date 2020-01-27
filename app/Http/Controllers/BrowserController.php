@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BrowserHistory;
 use App\Npc;
+use App\User;
 use Illuminate\Http\Request;
 
 class BrowserController extends Controller {
@@ -14,9 +15,22 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $npc = Npc::whereIpAddress($ip)->first();
-        if ( !$npc ) {
-            abort(404);
+        $type = [
+            'type' => 'NPC',
+            'color' => 'info'
+        ];
+
+        $server = Npc::whereIpAddress($ip)->first();
+        if ( !$server ) {
+            $server = User::whereIpAddress($ip)->first();
+            $type = [
+                'type' => 'VPC',
+                'color' => 'success'
+            ];
+
+            if ( !$server ) {
+                abort(404);
+            }
         }
 
         BrowserHistory::create([
@@ -24,7 +38,7 @@ class BrowserController extends Controller {
             'ip_address' => $ip
         ]);
 
-        return view('pages.browser.index', compact('npc'));
+        return view('pages.browser.index', compact('server', 'type'));
 
     }
 
@@ -38,12 +52,16 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $npc = Npc::whereIpAddress($ip)->first();
-        if ( !$npc ) {
-            abort(404);
+        $server = Npc::whereIpAddress($ip)->first();
+        if ( !$server ) {
+            $server = User::whereIpAddress($ip)->first();
+
+            if ( !$server ) {
+                abort(404);
+            }
         }
 
-        return view('pages.browser.login', compact('npc'));
+        return view('pages.browser.login', compact('server'));
 
     }
 
@@ -59,9 +77,13 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $npc = Npc::whereIpAddress($ip)->first();
-        if ( !$npc ) {
-            abort(404);
+        $server = Npc::whereIpAddress($ip)->first();
+        if ( !$server ) {
+            $server = User::whereIpAddress($ip)->first();
+
+            if ( !$server ) {
+                abort(404);
+            }
         }
 
         return redirect()->route('get.browser.index', $ip);
@@ -78,13 +100,43 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $npc = Npc::whereIpAddress($ip)->first();
-        if ( !$npc ) {
-            abort(404);
+        $server = Npc::whereIpAddress($ip)->first();
+        if ( !$server ) {
+            $server = User::whereIpAddress($ip)->first();
+
+            if ( !$server ) {
+                abort(404);
+            }
         }
 
-        return view('pages.browser.exploits', compact('npc'));
+        return view('pages.browser.exploits', compact('server'));
 
+    }
+
+    public function exploit ( Request $request, $ip = '1.2.3.4' ) {
+
+        if (!$request->hasAny(['bruteforce', 'exploit'])) {
+            return redirect()->route('get.browser.index', $ip);
+        }
+
+        if (user()->hasBrowserAuth()) {
+            return redirect()->route('get.browser.index', user()->getBrowserAuth());
+        }
+
+        if ( is_null($ip) ) {
+            abort(404); //Something went wrong?
+        }
+
+        $server = Npc::whereIpAddress($ip)->first();
+        if ( !$server ) {
+            $server = User::whereIpAddress($ip)->first();
+
+            if ( !$server ) {
+                abort(404);
+            }
+        }
+
+        return 'Lets do exploits';
     }
 
 }

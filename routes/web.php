@@ -31,5 +31,6 @@ Route::middleware([ 'auth' ])->group(function () {
 
         /* POST */
         Route::post('', 'BrowserController@browse')->name('post.browser.browse');
+        Route::post('/exploit', 'BrowserController@exploit')->name('post.browser.exploit');
     });
 });

@@ -13,7 +13,7 @@
                         @endif
                         <form method="post" action="{{ route('post.browser.browse') }}">
                             @csrf
-                            <input class="form-control" name="ip" placeholder="{{ $npc->ip_address }}">
+                            <input class="form-control" name="ip" placeholder="{{ $server->ip_address }}">
                         </form>
                     </div>
                 </div>
@@ -22,19 +22,19 @@
                         <ul class="nav">
                             <li class="nav-item col px-0">
                                 <a class="nav-link btn btn-flat rounded-left btn-secondary{{ request()->routeIs('get.browser.index') ? ' active' : '' }}"
-                                   href="{{ route('get.browser.index', $npc->ip_address) }}">
+                                   href="{{ route('get.browser.index', $server->ip_address) }}">
                                     <i class="fas fa-home"></i> Index
                                 </a>
                             </li>
                             <li class="nav-item col px-0">
                                 <a class="nav-link btn btn-flat btn-secondary{{ request()->routeIs('get.browser.login') ? ' active' : '' }}"
-                                   href="{{ route('get.browser.login', $npc->ip_address) }}">
+                                   href="{{ route('get.browser.login', $server->ip_address) }}">
                                     <i class="fas fa-sign-in-alt"></i> Login
                                 </a>
                             </li>
                             <li class="nav-item col px-0">
                                 <a class="nav-link btn btn-flat rounded-right btn-secondary{{ request()->routeIs('get.browser.exploits') ? ' active' : '' }}"
-                                   href="{{ route('get.browser.exploits', $npc->ip_address) }}">
+                                   href="{{ route('get.browser.exploits', $server->ip_address) }}">
                                     <i class="fas fa-terminal"></i> Exploits
                                 </a>
                             </li>
