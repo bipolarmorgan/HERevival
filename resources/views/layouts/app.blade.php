@@ -32,22 +32,22 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white rounded-left" href="#">
+                        <a class="nav-link btn btn-sm btn-flat btn-light rounded-left" href="#">
                             <i class="fas fa-user"></i> {{ auth()->user()->username }}
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white" href="#">
+                        <a class="nav-link btn btn-sm btn-flat btn-light" href="#">
                             <i class="fas fa-envelope"></i> Inbox
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white" href="#">
+                        <a class="nav-link btn btn-sm btn-flat btn-light" href="#">
                             <i class="fas fa-wrench"></i> Settings
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-sm btn-flat btn-dark text-white rounded-right" href="#">
+                        <a class="nav-link btn btn-sm btn-flat btn-light rounded-right" href="#">
                             <i class="fas fa-power-off"></i> Logout
                         </a>
                     </li>
@@ -88,7 +88,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('get.browser.index') }}" class="nav-link{{ request()->routeIs('get.browser.index') || request()->routeIs('get.browser.login') || request()->routeIs('get.browser.hack') || request()->routeIs('get.browser.ip') ? ' active' : '' }}">
+                                <a href="{{ route('get.browser.index') }}" class="nav-link{{ request()->routeIs('get.browser.index') || request()->routeIs('get.browser.login') || request()->routeIs('get.browser.exploits') ? ' active' : '' }}">
                                     <i class="nav-icon fas fa-globe"></i>
                                     <p>
                                         Internet

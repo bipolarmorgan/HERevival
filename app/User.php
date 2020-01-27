@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Traits\BrowserSessionTrait;
+use App\Traits\BrowserAuth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable {
-    use Notifiable, BrowserSessionTrait;
+    use Notifiable, BrowserAuth;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +48,10 @@ class User extends Authenticatable {
      * Relationships
      */
     public function hardware() {
-        return $this->hasMany(\App\Hardware::class)->whereNull('npc_id');
+        return $this->hasMany(Hardware::class)->whereNull('npc_id');
+    }
+
+    public function browser_history() {
+        return $this->hasMany(BrowserHistory::class);
     }
 }

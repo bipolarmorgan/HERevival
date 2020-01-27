@@ -57,7 +57,7 @@
                         <tr>
                             <td><i class="fas fa-globe"></i></td>
                             <td>Connected to</td>
-                            <td>{!! !isNullOrEmpty(user()->getBrowserSessionValue('auth')) ? '<a href="'.route('get.browser.ip', user()->getBrowserSessionValue('auth')).'">'.user()->getBrowserSessionValue('auth').'</a>' : 'No one' !!}</td>
+                            <td>{!! !isNullOrEmpty(user()->getBrowserSessionValue('auth')) ? '<a href="'.route('get.browser.index', user()->getBrowserSessionValue('auth')).'">'.user()->getBrowserSessionValue('auth').'</a>' : 'No one' !!}</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-folder"></i></td>

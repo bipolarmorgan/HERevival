@@ -17,19 +17,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware([ 'auth' ])->group(function () {
 
     Route::get('home', 'HomeController@index')->name('home');
 
-    Route::prefix('internet')->group(function() {
+    Route::prefix('internet/{ip?}')->group(function () {
 
+        /* GET */
         Route::get('/', 'BrowserController@index')->name('get.browser.index');
-        Route::get('login', 'BrowserController@showLogin')->name('get.browser.login');
-        Route::get('hack', 'BrowserController@hack')->name('get.browser.hack');
-        Route::get('ip/{ip}', 'BrowserController@setIp')->name('get.browser.ip');
-        Route::post('ip', 'BrowserController@setIp')->name('post.browser.ip');
+        Route::get('/login', 'BrowserController@showLogin')->name('get.browser.login');
+        Route::get('/exploits', 'BrowserController@exploits')->name('get.browser.exploits');
 
-        Route::post('login', 'BrowserController@login');
 
+        /* POST */
+        Route::post('', 'BrowserController@browse')->name('post.browser.browse');
     });
 });
