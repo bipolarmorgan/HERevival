@@ -32,9 +32,9 @@
                         </ul>
                     </div>
                     <div class="card-body">
-                        @if (user()->hasAuth())
+                        @if (user()->hasBrowserAuth())
                             <div class="alert alert-warning" role="alert">
-                                You're already logged in to <a href="{{ route('get.browser.index', user()->getAuth()) }}">{{ user()->getAuth() }}</a>, do you want to <a href="#">log out</a>?
+                                You're already logged in to <a href="{{ route('get.browser.index', user()->getBrowserAuth()) }}">{{ user()->getBrowserAuth() }}</a>, do you want to <a href="#">log out</a>?
                             </div>
                         @endif
 
@@ -48,6 +48,14 @@
                         Recently visited
                     </div>
                     <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            @foreach( user()->history as $item)
+                                <li>
+                                    <a href="{{ route('get.browser.index', $item['ip_address']) }}">{{ $item['ip_address'] }}</a>
+                                    <small class="text-muted">{{ $item['human_date'] }}</small>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
                 <div class="card">

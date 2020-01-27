@@ -64,7 +64,8 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
                             <li class="nav-item">
-                                <a href="{{ route('home') }}" class="nav-link{{ request()->routeIs('home') ? ' active' : '' }}">
+                                <a href="{{ route('home') }}"
+                                   class="nav-link{{ request()->routeIs('home') ? ' active' : '' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard
@@ -88,7 +89,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('get.browser.index') }}" class="nav-link{{ request()->routeIs('get.browser.index') || request()->routeIs('get.browser.login') || request()->routeIs('get.browser.exploits') ? ' active' : '' }}">
+                                <a href="{{ route('get.browser.index') }}"
+                                   class="nav-link{{ request()->routeIs('get.browser.index') || request()->routeIs('get.browser.login') || request()->routeIs('get.browser.exploits') ? ' active' : '' }}">
                                     <i class="nav-icon fas fa-globe"></i>
                                     <p>
                                         Internet
@@ -192,7 +194,8 @@
                 <div class="float-right d-none d-sm-block">
                     <b>Version</b> 1.0.0
                 </div>
-                <strong>&copy; {{ \Carbon\Carbon::now()->year }} - HERevival</strong>
+                <strong>&copy; {{ \Carbon\Carbon::now()->year }} - HERevival - Page
+                    took {{ number_format(microtime(true) - LARAVEL_START, 4 ) }} seconds to load</strong>
             </footer>
         </div>
 

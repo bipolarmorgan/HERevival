@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BrowserHistory;
 use App\Npc;
 use Illuminate\Http\Request;
 
@@ -18,14 +19,19 @@ class BrowserController extends Controller {
             abort(404);
         }
 
+        BrowserHistory::create([
+            'user_id' => user()->id,
+            'ip_address' => $ip
+        ]);
+
         return view('pages.browser.index', compact('npc'));
 
     }
 
     public function showLogin ( $ip = '1.2.3.4' ) {
 
-        if (user()->hasAuth()) {
-            return redirect()->route('get.browser.index', user()->getAuth());
+        if (user()->hasBrowserAuth()) {
+            return redirect()->route('get.browser.index', user()->getBrowserAuth());
         }
 
         if ( is_null($ip) ) {
@@ -64,8 +70,8 @@ class BrowserController extends Controller {
 
     public function exploits ( $ip = '1.2.3.4' ) {
 
-        if (user()->hasAuth()) {
-            return redirect()->route('get.browser.index', user()->getAuth());
+        if (user()->hasBrowserAuth()) {
+            return redirect()->route('get.browser.index', user()->getBrowserAuth());
         }
 
         if ( is_null($ip) ) {

@@ -8,8 +8,8 @@ trait BrowserAuth {
      * Create the browser session.
      * @return mixed
      */
-    public function createAuth () {
-        if ( $this->hasAuth() ) {
+    public function createBrowserAuth () {
+        if ( $this->hasBrowserAuth() ) {
             return session()->get('browser_session');
         }
 
@@ -20,9 +20,9 @@ trait BrowserAuth {
         return session()->get('browser_session');
     }
 
-    public function getAuth () {
-        if ( !$this->hasAuth() ) {
-            return $this->createAuth();
+    public function getBrowserAuth () {
+        if ( !$this->hasBrowserAuth() ) {
+            return $this->createBrowserAuth();
         }
 
         return session()->get('browser_session');
@@ -33,9 +33,9 @@ trait BrowserAuth {
      * @param string $browser
      * @return mixed
      */
-    public function replaceAuth ( string $browser ) {
-        if ( !$this->hasAuth() ) {
-            return $this->createAuth();
+    public function replaceBrowserAuth ( string $browser ) {
+        if ( !$this->hasBrowserAuth() ) {
+            return $this->createBrowserAuth();
         }
 
         session()->replace([ 'browser_session' => $browser ]);
@@ -54,7 +54,7 @@ trait BrowserAuth {
      * Check if the session exists
      * @return bool
      */
-    public function hasAuth () {
+    public function hasBrowserAuth () {
         return session()->exists('browser_session');
     }
 }

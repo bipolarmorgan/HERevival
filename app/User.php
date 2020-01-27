@@ -47,11 +47,20 @@ class User extends Authenticatable {
     /**
      * Relationships
      */
-    public function hardware() {
+    public function hardware () {
         return $this->hasMany(Hardware::class)->whereNull('npc_id');
     }
 
-    public function browser_history() {
-        return $this->hasMany(BrowserHistory::class);
+    public function browser_history () {
+        return $this->hasMany(BrowserHistory::class, 'user_id', 'id');
+    }
+
+    /**
+     * Attributes
+     */
+    public function getHistoryAttribute () {
+        $browser_history = $this->browser_history;
+
+        return $browser_history->sortByDesc('created_at')->unique('ip_address');
     }
 }
