@@ -20,18 +20,18 @@
                 <div class="card-header">
                     <ul class="nav nav-pills">
                         <li class="nav-item{{ request()->route()->getName() !== "get.browser.index" ? ' border rounded' : '' }}">
-                            <a class="nav-link{{ request()->route()->getName() !== "get.browser.index" ? '' : ' active' }}" href="{{ route('get.browser.index') }}"><i class="fad fa-home-lg"></i> Index</a>
+                            <a class="nav-link{{ request()->route()->getName() !== "get.browser.index" ? '' : ' active' }}" href="{{ route('get.browser.index') }}"><i class="fas fa-home"></i> Index</a>
                         </li>
                         <li class="nav-item{{ request()->route()->getName() !== "get.browser.login" ? ' border rounded' : '' }} ml-2">
-                            <a class="nav-link{{ request()->route()->getName() !== "get.browser.login" ? '' : ' active' }}" href="{{ route('get.browser.login') }}"><i class="fad fa-sign-in"></i> Login</a>
+                            <a class="nav-link{{ request()->route()->getName() !== "get.browser.login" ? '' : ' active' }}" href="{{ route('get.browser.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
                         </li>
                         <li class="nav-item{{ request()->route()->getName() !== "get.browser.hack" ? ' border rounded' : '' }} ml-2">
-                            <a class="nav-link{{ request()->route()->getName() !== "get.browser.hack" ? '' : ' active' }}" href="{{ route('get.browser.hack') }}"><i class="fad fa-terminal"></i> Hack</a>
+                            <a class="nav-link{{ request()->route()->getName() !== "get.browser.hack" ? '' : ' active' }}" href="{{ route('get.browser.hack') }}"><i class="fas fa-terminal"></i> Hack</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
-                    @if (!is_null_or_empty(user()->getBrowserSessionValue('auth')) && user()->getBrowserSessionValue('auth') !== user()->getBrowserSessionValue('ip_address'))
+                    @if (!isNullOrEmpty(user()->getBrowserSessionValue('auth')) && user()->getBrowserSessionValue('auth') !== user()->getBrowserSessionValue('ip_address'))
                         <div class="alert alert-warning" role="alert">
                             You're already logged in to <a href="{{ route('get.browser.ip', user()->getBrowserSessionValue('auth')) }}">{{ user()->getBrowserSessionValue('auth') }}</a>, do you want to <a href="#">log out</a>?
                         </div>

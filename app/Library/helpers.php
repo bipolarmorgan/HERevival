@@ -21,6 +21,21 @@ function user() {
     return auth()->user();
 }
 
-function is_null_or_empty($val) {
+function isNullOrEmpty($val) {
     return is_null($val) || empty($val);
+}
+
+function getUserTypeByName($val) {
+    switch ($val) {
+        case 'root':
+            return 0;
+        case 'ssh':
+            return 1;
+        case 'ftp':
+            return 2;
+        case 'download':
+            return 3;
+    }
+
+    return 0;
 }
