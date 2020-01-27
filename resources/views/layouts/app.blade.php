@@ -194,7 +194,7 @@
                 <div class="float-right d-none d-sm-block">
                     <b>Version</b> 1.0.0
                 </div>
-                <strong>&copy; {{ \Carbon\Carbon::now()->year }} - HERevival - Page
+                <strong>HERevival</strong> - Page
                     took {{ number_format(microtime(true) - LARAVEL_START, 4 ) }} seconds to load</strong>
             </footer>
         </div>
