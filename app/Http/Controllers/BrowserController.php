@@ -24,6 +24,10 @@ class BrowserController extends Controller {
 
     public function showLogin ( $ip = '1.2.3.4' ) {
 
+        if (user()->hasAuth()) {
+            return redirect()->route('get.browser.index', user()->getAuth());
+        }
+
         if ( is_null($ip) ) {
             abort(404); //Something went wrong?
         }
@@ -60,6 +64,10 @@ class BrowserController extends Controller {
 
     public function exploits ( $ip = '1.2.3.4' ) {
 
+        if (user()->hasAuth()) {
+            return redirect()->route('get.browser.index', user()->getAuth());
+        }
+
         if ( is_null($ip) ) {
             abort(404); //Something went wrong?
         }
@@ -68,7 +76,6 @@ class BrowserController extends Controller {
         if ( !$npc ) {
             abort(404);
         }
-
 
         return view('pages.browser.exploits', compact('npc'));
 
