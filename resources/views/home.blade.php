@@ -13,27 +13,27 @@
                         <tr>
                             <td><i class="fas fa-microchip"></i></td>
                             <td>Processor</td>
-                            <td>{{ auth()->user()->hardware()->sum('cpu') / 1000 }} GHz</td>
+                            <td>{{ user()->hardware->sum('cpu') / 1000 }} GHz</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-hdd"></i></td>
                             <td>Hard Drive</td>
-                            <td>{{ auth()->user()->hardware()->sum('hdd') / 1024 }} GB</td>
+                            <td>{{ user()->hardware->sum('hdd') / 1024 }} GB</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-memory"></i></td>
                             <td>Memory</td>
-                            <td>{{ auth()->user()->hardware()->sum('ram') / 1024 }} MB</td>
+                            <td>{{ user()->hardware->sum('ram') / 1024 }} MB</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-ethernet"></i></td>
                             <td>Network</td>
-                            <td>{{ auth()->user()->hardware()->sum('net') }} Mbit/s</td>
+                            <td>{{ user()->network->speed }} Mbit/s</td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-hdd"></i></td>
                             <td>External HD</td>
-                            <td>{{ auth()->user()->hardware()->sum('hdd') / 1024 }} GB</td>
+                            <td>{{ user()->hardware->sum('hdd') / 1024 }} GB</td>
                         </tr>
                     </table>
                 </div>

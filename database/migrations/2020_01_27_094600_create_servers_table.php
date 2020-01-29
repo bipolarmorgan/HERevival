@@ -10,24 +10,16 @@ class CreateServersTable extends Migration {
      *
      * @return void
      */
-    public function up() {
-        Schema::create('servers', function (Blueprint $table) {
+    public function up () {
+        Schema::create('servers', function ( Blueprint $table ) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('npc_id')->nullable();
 
-            $table->string('name');
-
-            $table->integer('cpu')->default(500);
-            $table->integer('hdd')->default(100);
-            $table->integer('ram')->default(256);
-            $table->integer('network')->default(1);
+            $table->bigInteger('user_id')->unsigned()->nullable()->default(null);
+            $table->bigInteger('npc_id')->unsigned()->nullable()->default(null);
 
             $table->timestamps();
             $table->softDeletes();
-        });
 
-        Schema::table('servers', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('npc_id')->references('id')->on('npcs');
         });
@@ -38,7 +30,7 @@ class CreateServersTable extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down () {
         Schema::dropIfExists('servers');
     }
 }

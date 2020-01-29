@@ -4,21 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrowserHistoryTable extends Migration {
+class CreateNetworksTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up () {
-        Schema::create('browser_history', function ( Blueprint $table ) {
+        Schema::create('networks', function ( Blueprint $table ) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
 
-            $table->ipAddress('ip_address');
+            $table->bigInteger('user_id')->unsigned()->nullable();
 
+            $table->integer('speed')->default(1);
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -28,6 +29,6 @@ class CreateBrowserHistoryTable extends Migration {
      * @return void
      */
     public function down () {
-        Schema::dropIfExists('browser_history');
+        Schema::dropIfExists('networks');
     }
 }

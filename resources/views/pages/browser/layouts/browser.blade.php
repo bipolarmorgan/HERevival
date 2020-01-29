@@ -4,13 +4,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
+                @if ($errors->any())
+                    <div class="alert alert-danger mb-3" role="alert">
+                        <ul class="list-unstyled m-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card mb-3">
                     <div class="card-body">
-                        @if ($errors->has('ip'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first('ip') }}
-                            </div>
-                        @endif
                         <form method="post" action="{{ route('post.browser.browse') }}">
                             @csrf
                             <input class="form-control" name="ip" placeholder="{{ $server->ip_address }}">

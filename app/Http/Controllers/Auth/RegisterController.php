@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Hardware;
+use App\Server;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -81,8 +82,12 @@ class RegisterController extends Controller {
             abort(404); // TODO: Error
         }
 
+        $server = Server::create([
+            'user_id' => auth()->id(),
+        ]);
+
         Hardware::create([
-            'user_id' => auth()->id()
+            'server_id' => $server->id
         ]);
     }
 }
