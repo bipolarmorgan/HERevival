@@ -51,16 +51,21 @@ class User extends Authenticatable {
         return $this->hasMany(BrowserHistory::class, 'user_id', 'id');
     }
 
-    public function network () {
-        return $this->hasOne(Network::class, 'user_id', 'id');
-    }
-
-    public function hardware () {
-        return $this->hasManyThrough(Hardware::class, Server::class)->whereNull('npc_id');
+    public function network() {
+        return $this->morphOne(Network::class, 'entity');
     }
 
     public function servers () {
-        return $this->hasMany(Server::class, 'user_id', 'id')->whereNull('npc_id');
+        return $this->morphMany(Server::class, 'entity');
+    }
+
+    public function hardware_sum($type) {
+        $sum = 0;
+        foreach ($this->servers as $server) {
+            $sum = $sum + $server->hardware->sum($type);
+        }
+
+        return $sum;
     }
 
     /**

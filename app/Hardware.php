@@ -20,14 +20,10 @@ class Hardware extends Model {
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'npc_id',
-        'name',
-        'cpu',
-        'hdd',
-        'ram',
-        'network',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
     ];
 
     /**

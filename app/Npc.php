@@ -41,6 +41,14 @@ class Npc extends Model {
         }
     }
 
+    public function servers() {
+        return $this->morphMany(Server::class, 'entity');
+    }
+
+    public function network() {
+        return $this->morphOne(Network::class, 'entity');
+    }
+
     /**
      * Relationships
      */

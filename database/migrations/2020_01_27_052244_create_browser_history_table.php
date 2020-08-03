@@ -12,7 +12,7 @@ class CreateBrowserHistoryTable extends Migration {
      */
     public function up () {
         Schema::create('browser_history', function ( Blueprint $table ) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
 
             $table->ipAddress('ip_address');

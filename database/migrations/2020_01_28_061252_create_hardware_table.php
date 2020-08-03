@@ -12,7 +12,7 @@ class CreateHardwareTable extends Migration {
      */
     public function up() {
         Schema::create('hardware', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->bigInteger('server_id')->unsigned();
 
             $table->float('cpu')->default(500);

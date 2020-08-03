@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BrowserHistory;
 use App\Npc;
+use App\Server;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -16,22 +17,10 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $type = [
-            'type'  => 'NPC',
-            'color' => 'info'
-        ];
+        $server = Server::whereIpAddress($ip)->first();
 
-        $server = Npc::whereIpAddress($ip)->first();
-        if ( !$server ) {
-            $server = User::whereIpAddress($ip)->first();
-            $type = [
-                'type'  => 'VPC',
-                'color' => 'success'
-            ];
-
-            if ( !$server ) {
-                abort(404);
-            }
+        if (!$server) {
+            abort(404);
         }
 
         BrowserHistory::create([
@@ -39,7 +28,7 @@ class BrowserController extends Controller {
             'ip_address' => $ip
         ]);
 
-        return view('pages.browser.index', compact('server', 'type'));
+        return view('pages.browser.index', compact('server'));
 
     }
 

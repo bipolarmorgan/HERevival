@@ -12,11 +12,9 @@ class CreateNpcsTable extends Migration {
      */
     public function up() {
         Schema::create('npcs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->integer('type');
             $table->string('name');
-            $table->ipAddress('ip_address')->unique();
-            $table->string('password');
 
             $table->longText('webserver')->nullable()->default(null);
 

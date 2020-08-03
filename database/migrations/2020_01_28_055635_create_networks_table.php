@@ -12,9 +12,9 @@ class CreateNetworksTable extends Migration {
      */
     public function up () {
         Schema::create('networks', function ( Blueprint $table ) {
-            $table->bigIncrements('id');
+            $table->id();
 
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->morphs('entity');
 
             $table->integer('speed')->default(1);
             $table->timestamps();

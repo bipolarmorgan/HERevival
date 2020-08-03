@@ -12,14 +12,12 @@ class CreateUsersTable extends Migration {
      */
     public function up() {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id')->unique();
+            $table->id();
             $table->string('username')->unique();
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('game_password')->nullable();
 
             $table->ipAddress('ip_address');
-            $table->ipAddress('game_address')->unique();
 
             $table->boolean('is_admin')->default(0);
 

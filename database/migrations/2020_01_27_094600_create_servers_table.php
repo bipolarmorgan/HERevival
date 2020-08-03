@@ -14,14 +14,12 @@ class CreateServersTable extends Migration {
         Schema::create('servers', function ( Blueprint $table ) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('user_id')->unsigned()->nullable()->default(null);
-            $table->bigInteger('npc_id')->unsigned()->nullable()->default(null);
+            $table->morphs('entity');
+            $table->string('password')->nullable();
+            $table->ipAddress('ip_address')->unique();
 
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('npc_id')->references('id')->on('npcs');
         });
     }
 

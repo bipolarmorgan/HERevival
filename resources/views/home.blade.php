@@ -13,17 +13,17 @@
                         <tr>
                             <td><i class="fas fa-microchip"></i></td>
                             <td>Processor</td>
-                            <td>{{ user()->hardware->sum('cpu') / 1000 }} GHz</td>
+                            <td>{{ user()->hardware_sum('cpu') / 1000 }} GHz</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-hdd"></i></td>
                             <td>Hard Drive</td>
-                            <td>{{ user()->hardware->sum('hdd') / 1024 }} GB</td>
+                            <td>{{ user()->hardware_sum('hdd') / 1024 }} GB</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-memory"></i></td>
                             <td>Memory</td>
-                            <td>{{ user()->hardware->sum('ram') / 1024 }} MB</td>
+                            <td>{{ user()->hardware_sum('ram') / 1024 }} MB</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-ethernet"></i></td>
@@ -33,7 +33,7 @@
                         <tr>
                             <td><i class="fa fa-hdd"></i></td>
                             <td>External HD</td>
-                            <td>{{ user()->hardware->sum('hdd') / 1024 }} GB</td>
+                            <td>{{ user()->hardware_sum('hdd') / 1024 }} GB</td>
                         </tr>
                     </table>
                 </div>

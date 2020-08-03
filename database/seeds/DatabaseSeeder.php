@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $npcs = Storage::get('npcs.json');
+        dd(json_decode($npcs));
     }
 }
