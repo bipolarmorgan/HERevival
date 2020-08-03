@@ -42,13 +42,9 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $server = Npc::whereIpAddress($ip)->first();
+        $server = Server::whereIpAddress($ip)->first();
         if ( !$server ) {
-            $server = User::whereIpAddress($ip)->first();
-
-            if ( !$server ) {
-                abort(404);
-            }
+            abort(404);
         }
 
         return view('pages.browser.login', compact('server'));
@@ -71,13 +67,9 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $server = Npc::whereIpAddress($ip)->first();
+        $server = Server::whereIpAddress($ip)->first();
         if ( !$server ) {
-            $server = User::whereIpAddress($ip)->first();
-
-            if ( !$server ) {
-                abort(404);
-            }
+            abort(404);
         }
 
         return view('pages.browser.exploits', compact('server'));
@@ -98,13 +90,9 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $server = Npc::whereIpAddress($ip)->first();
+        $server = Server::whereIpAddress($ip)->first();
         if ( !$server ) {
-            $server = User::whereIpAddress($ip)->first();
-
-            if ( !$server ) {
-                abort(404);
-            }
+            abort(404);
         }
 
         if ($request->has('bruteforce')) {
@@ -130,13 +118,9 @@ class BrowserController extends Controller {
             abort(404); //Something went wrong?
         }
 
-        $server = Npc::whereIpAddress($ip)->first();
+        $server = Server::whereIpAddress($ip)->first();
         if ( !$server ) {
-            $server = User::whereIpAddress($ip)->first();
-
-            if ( !$server ) {
-                abort(404);
-            }
+            abort(404);
         }
 
         return redirect()->route('get.browser.index', $ip);
@@ -150,13 +134,9 @@ class BrowserController extends Controller {
             'password' => [ 'required', 'string', 'min:3', 'max:255' ]
         ]);
 
-        $server = Npc::whereIpAddress($ip)->wherePassword($request->password)->first();
+        $server = Server::whereIpAddress($ip)->wherePassword($request->password)->first();
         if ( !$server ) {
-            $server = User::whereIpAddress($ip)->wherePassword($request->password)->first();
-
-            if ( !$server ) {
-                return 'password unknown.';
-            }
+            abort(404);
         }
 
         return redirect()->route('get.browser.index', $server->ip_address);
