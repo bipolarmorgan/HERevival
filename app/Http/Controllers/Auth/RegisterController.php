@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Hardware;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller {
     /*
@@ -30,7 +30,7 @@ class RegisterController extends Controller {
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -59,37 +59,28 @@ class RegisterController extends Controller {
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return User
+     * @return \App\User
      */
     protected function create(array $data) {
         return User::create([
-            'username'      => $data['name'],
-            'email'         => $data['email'],
-            'password'      => bcrypt($data['password']),
-            'ip_address'    => request()->ip(),
+            'name'       => $data['name'],
+            'email'      => $data['email'],
+            'password'   => Hash::make($data['password']),
+            'last_login' => Carbon::now()
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param User $user
-     */
-    protected function registered(Request $request, $user) {
-        if (!auth()->check()) {
-            abort(404); // TODO: Error
-        }
-
-        $server = $user->servers()->create([
-            'password'   => Str::random(6),
-            'ip_address' => generate_ip(),
-        ]);
-
-        Hardware::create([
-            'server_id' => $server->id
+    protected function registered(Request $request, User $user) {
+        $user->servers()->create([
+            'cpu' => 500,
+            'hdd' => 100,
+            'ram' => 256
         ]);
 
         $user->network()->create([
-            'speed' => 1
+            'ip_address' => implode('.', [mt_rand(1, 255), mt_rand(1, 255), mt_rand(1, 255), mt_rand(1, 255)]),
+            'speed'      => 1
         ]);
     }
+
 }

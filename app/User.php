@@ -2,28 +2,23 @@
 
 namespace App;
 
-use App\Traits\BrowserAuth;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable {
-    use Notifiable, BrowserAuth;
+class User extends Authenticatable
+{
+    use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'username',
-        'email',
-        'password',
-        'game_password',
-        'real_ip_address',
-        'ip_address',
-        'is_admin',
-        'learning_step',
-        'webserver'
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -44,36 +39,11 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Relationships
-     */
-    public function browser_history () {
-        return $this->hasMany(BrowserHistory::class, 'user_id', 'id');
+    public function servers() {
+        return $this->morphMany(Server::class, 'owner');
     }
 
     public function network() {
-        return $this->morphOne(Network::class, 'entity');
-    }
-
-    public function servers () {
-        return $this->morphMany(Server::class, 'entity');
-    }
-
-    public function hardware_sum($type) {
-        $sum = 0;
-        foreach ($this->servers as $server) {
-            $sum = $sum + $server->hardware->sum($type);
-        }
-
-        return $sum;
-    }
-
-    /**
-     * Attributes
-     */
-    public function getHistoryAttribute () {
-        $browser_history = $this->browser_history;
-
-        return $browser_history->sortByDesc('created_at')->unique('ip_address');
+        return $this->morphOne(Network::class, 'owner');
     }
 }

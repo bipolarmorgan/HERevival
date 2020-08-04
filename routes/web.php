@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,21 +19,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware([ 'auth' ])->group(function () {
-
-    Route::get('home', 'HomeController@index')->name('home');
-
-    Route::prefix('internet/{ip?}')->group(function () {
-
-        /* GET */
-        Route::get('/', 'BrowserController@index')->name('get.browser.index');
-        Route::get('/login', 'BrowserController@showLogin')->name('get.browser.login');
-        Route::get('/exploits', 'BrowserController@exploits')->name('get.browser.exploits');
-
-
-        /* POST */
-        Route::post('', 'BrowserController@browse')->name('post.browser.browse');
-        Route::post('/login', 'BrowserController@login')->name('post.browser.login');
-        Route::post('/exploit', 'BrowserController@exploit')->name('post.browser.exploit');
-    });
-});
+Route::get('/home', 'HomeController@index')->name('home');

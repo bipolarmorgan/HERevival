@@ -8,12 +8,6 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    @if(session('login-error'))
-                        <div class="alert alert-danger">
-                            <i class="fad fa-exclamation-triangle"></i>
-                            {{ session('login-error') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

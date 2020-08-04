@@ -6,43 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Server extends Model {
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
-    protected $appends = [
-        'type'
-    ];
-
-    public function entity() {
+    public function owner() {
         return $this->morphTo();
     }
 
     public function network() {
-        return $this->hasOne(Network::class, 'user_id', 'user_id');
-    }
-
-    public function hardware() {
-        return $this->hasMany(Hardware::class, 'server_id');
-    }
-
-    public function getTypeAttribute() {
-        if ($this->entity_type === User::class) {
-            return [
-                'type' => 'VPC',
-                'color' => 'success'
-            ];
-        }
-
-        return [
-            'type' => 'NPC',
-            'color' => 'info'
-        ];
-    }
-
-    public function summarize() {
-        dd($this->hardware->sum('cpu'));
+        return $this->hasOne(Network::class);
     }
 }
