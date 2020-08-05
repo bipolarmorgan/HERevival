@@ -10932,3 +10932,17 @@ a.text-dark:focus {
   width: 0.5rem;
 }
 
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #f8fafc;
+  border-bottom-color: #fff;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  background-color: #fff;
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+

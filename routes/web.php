@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/internet/{network:ip_address}', 'InternetController@index')->name('internet');
+Route::post('/internet', 'InternetController@navigate')->name('internet.navigate');
