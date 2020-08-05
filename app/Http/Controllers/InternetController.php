@@ -17,4 +17,11 @@ class InternetController extends Controller {
 
         return redirect()->route('internet', $data['ip_address']);
     }
+
+    public function login(Request $request) {
+        $data = $request->validate([
+
+        ]);
+
+    }
 }

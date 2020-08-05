@@ -45,6 +45,11 @@
                                     Internet
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('slaves') }}" class="nav-link">
+                                    Hacked Database
+                                </a>
+                            </li>
                         </ul>
                     @endguest
 
